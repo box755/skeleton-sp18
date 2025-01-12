@@ -123,7 +123,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         validateSinkSwimArg(index);
         int leftIndex = leftIndex(index);
         int rightIndex = rightIndex(index);
-        if(leftIndex > size && rightIndex > size){
+        if((leftIndex > size || leftIndex < 1) && (rightIndex > size || rightIndex < 1)){
             return;
         }
         int descIndex = min(leftIndex, rightIndex);
@@ -446,4 +446,24 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
     }
 
+    @Test
+    public void myTest() {
+        ArrayHeap<String> pq = new ArrayHeap<>();
+        pq.insert("c", 3);
+        pq.insert("i", 9);
+        pq.insert("g", 7);
+        pq.insert("d", 4);
+        pq.insert("a", 1);
+        pq.insert("h", 8);
+        pq.insert("e", 5);
+        pq.insert("b", 2);
+        pq.insert("c", 3);
+        pq.insert("d", 4);
+        System.out.println(pq);
+
+        pq.changePriority("i", 0);
+        System.out.println(pq);
+
+
+    }
 }
