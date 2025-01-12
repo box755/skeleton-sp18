@@ -177,8 +177,11 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         T itemRemoved = contents[1].item();
         contents[1] = contents[size];
         contents[size] = null;
-        sink(1);
         size--;
+
+        if(size > 1){
+            sink(1);
+        }
         return itemRemoved;
     }
 
@@ -465,5 +468,19 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         System.out.println(pq);
 
 
+    }
+
+    @Test
+    public void testInsertAndRemoveMin() {
+        ArrayHeap<String> pq = new ArrayHeap<>();
+        pq.insert("apple", 5);
+        pq.insert("banana", 3);
+        pq.insert("cherry", 8);
+        pq.insert("date", 2);
+
+        assertEquals("date", pq.removeMin());
+        assertEquals("banana", pq.removeMin());
+        assertEquals("apple", pq.removeMin());
+        assertEquals("cherry", pq.removeMin());
     }
 }
